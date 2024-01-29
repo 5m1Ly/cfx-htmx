@@ -2789,6 +2789,8 @@ return (function () {
                 (matches(elt, "form") && getRawAttribute(elt, 'enctype') === "multipart/form-data");
         }
 
+        // cfx-htmx
+        // this should be looked at in the future
         function encodeParamsForBody(xhr, elt, filteredParameters) {
             var encodedParameters = null;
             withExtensions(elt, function (extension) {
@@ -3281,6 +3283,11 @@ return (function () {
                 return promise;
             };
 
+            // cfx-htmx
+            // change the base URL to https://<resource name>/<path> instead of https://cfx-nui-<resource name>/<path>
+            // set the final path to the actual path we are going to request
+            finalPath = 'https://' + window.name + finalPath
+
             xhr.open(verb.toUpperCase(), finalPath, true);
             xhr.overrideMimeType("text/html");
             xhr.withCredentials = requestConfig.withCredentials;
@@ -3378,7 +3385,13 @@ return (function () {
                 });
             });
             triggerEvent(elt, 'htmx:beforeSend', responseInfo);
-            var params = useUrlParams ? null : encodeParamsForBody(xhr, elt, filteredParameters)
+
+            // cfx-htmx
+            // changed the way we send the parameters, because of the way that RegisterNUICallback behaves
+            // note: could be the cause of future problems, not properly tested yet
+            // var params = useUrlParams ? null : encodeParamsForBody(xhr, elt, filteredParameters)
+            var params = useUrlParams ? null : JSON.stringify(filteredParameters)
+
             xhr.send(params);
             return promise;
         }
@@ -3522,7 +3535,13 @@ return (function () {
             // this can be ovverriden by responding to the htmx:beforeSwap event and
             // overriding the detail.shouldSwap property
             var shouldSwap = xhr.status >= 200 && xhr.status < 400 && xhr.status !== 204;
-            var serverResponse = xhr.response;
+
+            // cfx-htmx
+            // we parse the response with the json.parse function
+            // this is because the call back function in RegisterNUICallback returns a stringified json object even if it isn't a json object
+            // var serverResponse = xhr.response;
+            var serverResponse = JSON.parse(xhr.response);
+
             var isError = xhr.status >= 400;
             var ignoreTitle = htmx.config.ignoreTitle
             var beforeSwapDetails = mergeObjects({shouldSwap: shouldSwap, serverResponse:serverResponse, isError:isError, ignoreTitle:ignoreTitle }, responseInfo);
