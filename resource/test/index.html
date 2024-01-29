@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="../src/htmx.js"></script>
+        <style> html, body { color: white } .hide { display: none; } </style>
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="hide" id="hxtest">
+            <form>
+                <input type="email" name="email" placeholder="enter email address">
+                <br>
+                <input type="text" name="name" placeholder="enter name">
+                <button
+                    hx-post="/htmx"
+                    hx-target="#response"
+                >
+                    Submit
+                </button>
+            </form>
+            <div id="response"></div>
+        </div>
+    </body>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const hxtest = document.querySelector("#hxtest");
+            window.addEventListener("message", ({ data: { action } }) => {
+                switch (action) {
+                    case "toggle":
+                        hxtest.classList.toggle("hide");
+                        break;
+                }
+            });
+        });
+    </script>
+</html>
