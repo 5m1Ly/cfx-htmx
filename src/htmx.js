@@ -465,8 +465,10 @@ return (function () {
 
         function normalizePath(path) {
             try {
+                console.log("path:", path)
                 var url = new URL(path);
                 if (url) {
+                    console.log("url.pathname:", url.pathname)
                     path = url.pathname + url.search;
                 }
                 // remove trailing slash, unless index page
