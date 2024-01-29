@@ -7,8 +7,8 @@ This repository is a modified version of the [official htmx repo](https://github
 1. add the resource to your server.cfg
 1. add the following to your html head tag
     ```html
-        <!-- HTMX -->
-        <script type="text/javascript" src="https://cfx-nui-htmx/dist/htmx.js"></script>
+    <!-- HTMX -->
+    <script type="text/javascript" src="https://cfx-nui-htmx/dist/htmx.js"></script>
     ```
 1. once this is done you shoud be able to use htmx within your resources
 
