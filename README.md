@@ -2,7 +2,7 @@
 This repository is a modified version of the [official htmx repo](https://github.com/bigskysoftware/htmx). The modifications made, are specifically for getting htmx to work with the CitizenFX server builds.
 
 ## Installation
-1. download the latest release resource
+1. download the [latest release](https://github.com/5m1Ly/cfx-htmx/releases/latest) resource
 1. place the resource folder somewhere in your fxserver project
 1. add the resource to your server.cfg
 1. add the following to your html head tag
