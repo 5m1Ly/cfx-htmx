@@ -4,16 +4,13 @@ game 'gta5'
 
 name 'cfx-htmx'
 description 'The HTMX library, modified to work within CitizenFX servers.'
-version '0.0.1'
+version '0.1.0'
 
-client_script 'test/client.lua'
+client_script 'src/client.lua'
 
-ui_page {
-    'test/index.html'
-}
+ui_page 'src/index.html'
 
 files {
-    'test/index.html',
+    'src/index.html',
     'dist/htmx.js',
 }
-
