@@ -1,7 +1,7 @@
 # CFX HTMX
 This repository is a modified version of the [official htmx repo](https://github.com/bigskysoftware/htmx). The modifications made, are specifically for making htmx compatible with the CitizenFX server builds.
 
-**htmx version**: *1.9.10*
+**htmx version**: *2.0.7*
 
 ## Installation
 1. download the [latest release](https://github.com/5m1Ly/cfx-htmx/releases/latest) htmx resource
